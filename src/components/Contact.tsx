@@ -11,33 +11,40 @@ export default function Contact() {
     setTimeout(() => setCopied(false), 1300);
   };
 
+  // 直接使用正确的路径常量，避免拼写错误
+  const wechatQrPath = "/my-wechat-qr.jpg";
+
   return (
     <section id="contact" className="w-full max-w-4xl mx-auto px-4 md:px-0 mb-16 pt-10">
       <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-7 tracking-tight">联系我</h2>
       
       <div className="grid sm:grid-cols-2 gap-7">
-        {/* 左侧：微信二维码 */}
+        {/* 左侧：微信二维码卡片 */}
         <motion.div
           className="bg-white rounded-xl shadow-lg border border-gray-200 flex flex-col items-center p-6 group relative cursor-pointer hover:shadow-xl transition-shadow"
           whileHover={{ y: -2 }}
         >
-          <img 
-            src="/my-website/my-wechat-qr.jpg" 
-            alt="微信二维码"
-            className="w-32 h-32 mb-4 rounded-lg border-2 border-blue-100 object-contain bg-white p-2"
-            onError={(e) => {
-              console.error('二维码加载失败');
-              e.target.style.display = 'none';
-              const parent = e.target.parentElement;
-              const errorDiv = document.createElement('div');
-              errorDiv.className = 'text-center py-4';
-              errorDiv.innerHTML = `
-                <div class="text-red-500 mb-2">⚠️ 二维码加载失败</div>
-                <div class="text-sm text-gray-500">请检查图片路径</div>
-              `;
-              parent.insertBefore(errorDiv, e.target.nextSibling);
-            }}
-          />
+          {/* 二维码图片 - 使用修正后的路径 */}
+          <div className="w-32 h-32 mb-4 flex items-center justify-center rounded-lg border-2 border-blue-100 bg-white p-2">
+            <img 
+              src={wechatQrPath}
+              alt="微信二维码"
+              className="w-full h-full object-contain"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                console.error(`二维码加载失败，请检查路径: ${wechatQrPath}`);
+                target.style.display = 'none';
+                // 显示友好的错误提示
+                const placeholder = document.createElement('div');
+                placeholder.className = 'w-full h-full flex flex-col items-center justify-center';
+                placeholder.innerHTML = `
+                  <div class="text-3xl mb-2">📱</div>
+                  <div class="text-xs text-gray-500 text-center">请添加微信<br/>damon@echargingcn.com</div>
+                `;
+                target.parentNode?.insertBefore(placeholder, target.nextSibling);
+              }}
+            />
+          </div>
           <span className="text-lg font-medium text-gray-800 mb-1">{CONTACT.wechat.label}</span>
           <span className="text-sm text-blue-600">{CONTACT.wechat.tip}</span>
           <span className="absolute inset-0 group-hover:bg-blue-50/30 transition pointer-events-none rounded-xl" />

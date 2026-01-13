@@ -1,35 +1,81 @@
+import React from "react";
 import { HERO } from "../data";
-import { motion } from "framer-motion";
 
 export default function Hero() {
+  // 调试日志，确认组件渲染
+  console.log("Hero 渲染了，HERO 数据是：", HERO);
+
+  // 防御式判断，防止数据为空
+  const name = HERO?.name || "刘政";
+  const title = HERO?.title || "新能源充电行业负责人";
+  const value = HERO?.value || "深耕新能源充电领域，负责项目落地、资源协调与业务推进，致力于将复杂问题转化为可执行的商业结果。";
+
   return (
-    <section id="hero" className="min-h-[60vh] flex items-center justify-center relative mt-24 max-w-4xl mx-auto px-4 md:px-0 mb-16">
-      <div className="space-y-7 w-full flex flex-col items-start">
-        <motion.h1
-          className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-2"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+    <section
+      id="hero"
+      style={{
+        minHeight: "100vh",               // 占满全屏
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "linear-gradient(135deg, #0f172a, #1e293b)",
+        color: "#fff",
+        padding: "0 24px",
+        textAlign: "center",
+      }}
+    >
+      <div style={{ maxWidth: "900px" }}>
+        {/* 姓名 */}
+        <h1
+          style={{
+            fontSize: "3rem",
+            fontWeight: 600,
+            marginBottom: "16px",
+            lineHeight: 1.2,
+          }}
         >
-          {HERO.name}
-        </motion.h1>
-        <div className="text-lg md:text-2xl font-medium text-green-300 mb-2">{HERO.title}</div>
-        <div className="text-base md:text-lg text-gray-300 font-light">{HERO.value}</div>
-        <div className="flex gap-4 pt-2">
-          {HERO.ctas.map((btn, i) => (
-            <a
-              key={btn.to}
-              href={btn.to}
-              className={`rounded-xl px-5 py-2.5 font-semibold transition-all border 
-               ${i === 0
-                  ? "bg-green-900 border-green-500 text-green-100 hover:bg-green-700"
-                  : "border-gray-600 text-gray-100 hover:bg-gray-800"}
-                shadow-md hover:shadow-green-800/20`}
-            >
-              {btn.text}
-            </a>
-          ))}
-        </div>
+          {name}
+        </h1>
+
+        {/* 职位 */}
+        <p
+          style={{
+            fontSize: "1.5rem",
+            marginBottom: "12px",
+            opacity: 0.9,
+          }}
+        >
+          {title}
+        </p>
+
+        {/* 价值主张 / 简介 */}
+        <p
+          style={{
+            fontSize: "1.1rem",
+            lineHeight: 1.7,
+            marginBottom: "32px",
+            opacity: 0.75,
+          }}
+        >
+          {value}
+        </p>
+
+        {/* CTA 按钮 */}
+        <a
+          href="#achievements"
+          style={{
+            display: "inline-block",
+            padding: "14px 36px",
+            backgroundColor: "#10b981",
+            color: "#fff",
+            textDecoration: "none",
+            borderRadius: "8px",
+            fontSize: "1rem",
+            fontWeight: 500,
+          }}
+        >
+          查看关键成就
+        </a>
       </div>
     </section>
   );

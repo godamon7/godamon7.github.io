@@ -1,21 +1,27 @@
-import React from 'react';
-import Hero from './components/Hero';
-import About from './components/About';
-import Experience from './components/Experience';
-import Skills from './components/Skills';
-import Achievements from './components/Achievements';
-import Contact from './components/Contact';
+import Layout from "./components/Layout";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Achievements from "./components/Achievements"; // ⭐ 新增
+import Education from "./components/Education";
+import Experience from "./components/Experience";
+import Skills from "./components/Skills";
+import Contact from "./components/Contact";
+
+// 注意：根据之前的对话，你已经移除了 GitHub，
+// 并确认了 Skills 部分的修改。
+// Achievements 已经新增。
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+    <Layout>
       <Hero />
       <About />
+      <Achievements />       {/* ⭐ 新增关键成就模块 */}
+      <Education />
       <Experience />
       <Skills />
-      <Achievements />
       <Contact />
-    </div>
+    </Layout>
   );
 }
 

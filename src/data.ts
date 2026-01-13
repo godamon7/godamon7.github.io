@@ -144,8 +144,8 @@ export const ACHIEVEMENTS = [
   {
     icon: "📦",
     title: "供应链优化",
-    value: "核心元器件安全库存周期从10天降至7天",
-    desc: "库存周转率提升30%"
+    value: "核心元器件安全库存周期从60天降至15天",
+    desc: "库存周转率提升25%"
   },
   {
     icon: "🤝",
@@ -158,7 +158,7 @@ export const ACHIEVEMENTS = [
 export const CONTACT = {
   wechat: {
     label: "微信",
-    qr: "/my-website/my-wechat-qr.jpg",
+    qr: "/my-wechat-qr.jpg",
     tip: "扫码添加微信",
   },
   email: {
